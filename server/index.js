@@ -39,6 +39,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
+const generateID = () => Math.random().toString(36).substring(2, 10);
+
 app.post("/api/register", async (req, res) => {
   const { email, password, username } = req.body;
 
@@ -112,11 +114,11 @@ app.post("/api/create/thread", async (req, res) => {
     });
   });
   
-//   app.get("/api/all/threads", async (req, res) => {
-//     res.json({
-//         threads: threadList,
-//     });
-// });
+app.get("/api/all/threads", async (req, res) => {
+    res.json({
+        threads: threadList,
+    });
+});
 
 
 app.listen(PORT, () => {
