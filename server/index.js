@@ -40,7 +40,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-const generateID = () => Math.random().toString(36).substring(2, 10);
 
 app.post("/api/register", async (req, res) => {
   const { email, password, username } = req.body;
@@ -175,8 +174,6 @@ app.post("/api/create/reply", async (req, res) => {
 		message: "Response added successfully!",
 	});
 });
-
-  });
   
 
 
