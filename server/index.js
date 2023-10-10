@@ -40,6 +40,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
+const generateID = () => Math.random().toString(36).substring(2, 10);
+
 app.post("/api/register", async (req, res) => {
   const { email, password, username } = req.body;
 
@@ -106,6 +108,7 @@ app.post("/api/create/thread", async (req, res) => {
       message: "Thread created successfully!",
       thread: newThread,
     });
+    
   } catch (error) {
     console.error("Error creating thread", error);
     res.status(500).json({
@@ -173,6 +176,8 @@ app.post("/api/create/reply", async (req, res) => {
 	});
 });
 
+  });
+  
 
 
 app.listen(PORT, () => {
