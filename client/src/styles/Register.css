@@ -6,12 +6,12 @@
     padding: 0;
     font-family: "Space Grotesk", sans-serif;
 }
-body {
+/* body {
 	background-image: url("../assets/background.jpg");
 	background-size: cover; 
 	background-position: center center;
 	background-attachment: fixed; 
-}
+} */
 
 input {
     padding: 10px;

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Nav from "./Nav";
+import Likes from "../utils/Likes";
+import Comments from "../utils/Comments";
 import '../styles/Home.css';
 
 const Home = () => {
@@ -10,12 +12,15 @@ const Home = () => {
 
     useEffect(() => {
         const checkUser = () => {
-            if(!localStorage.getItem("_id")) {
+            if (!localStorage.getItem("_id")) {
                 navigate("/");
             } else {
                 fetch("http://localhost:4000/api/all/threads")
                     .then((res) => res.json())
-                    .then((data) => setThreadList(data.threads))
+                    .then((data) => {
+                        console.log("Received data:", data); // Log the data
+                        setThreadList(data.threads || []); // Initialize as an empty array if data.threads is undefined
+                    })
                     .catch((err) => console.error(err));
             }
         };
@@ -36,7 +41,8 @@ const Home = () => {
             .then((res) => res.json())
             .then((data) => {
                 alert(data.message);
-                setThreadList(data.threads);
+                setThreadList(data.threads || []);
+                window.location.reload();
             })
             .catch((err) => console.error(err));
     };
@@ -70,15 +76,31 @@ const Home = () => {
                 <p></p>
 
                 <div className='thread__container'>
-
-                    {threadList.map((thr) => (
-                        <div className='thread__item' key={thr.id}>
-                            <p>{thr.title}</p>
+                    {threadList.map((thread) => (
+                        <div className='thread__item' key={thread._id}>
+                            <p>{thread.title}</p>
+                            <div className='react__container'>
+                                {thread.likes && (
+                                    <Likes
+                                        numberOfLikes={thread.likes.length}
+                                        threadId={thread._id}
+                                    />
+                                )}
+                                {thread.replies && (
+                                    <Comments
+                                        numberOfComments={thread.replies.length}
+                                        threadId={thread._id}
+                                        title={thread.title}
+                                    />
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>
+
             </main>
         </>
     );
 };
+
 export default Home;

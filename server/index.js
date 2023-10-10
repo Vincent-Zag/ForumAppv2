@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const app = express();
 const PORT = 4000;
+const generateID = () => Math.random().toString(36).substring(2, 10);
 
 // Connect to MongoDB
 mongoose.connect("mongodb+srv://admin:password1231@forumthreads.wdom9t6.mongodb.net/forums", {
@@ -94,31 +95,89 @@ app.post("/api/login", async (req, res) => {
 
 
 // Forums
+// Forums
 app.post("/api/create/thread", async (req, res) => {
-    const { thread, userId } = req.body;
-    const threadId = generateID();
-    
-    const newThread = {
-      id: threadId,
-      title: thread,
-      userId,
-      replies: [],
-      likes: [],
-    };
-    
-    threadList.unshift(newThread);
-  
+  const { thread, userId } = req.body;
+
+  try {
+    // Create a new thread document and save it to the database
+    const newThread = new Thread({ title: thread, userId, replies: [], likes: [] });
+    await newThread.save();
+
     res.json({
       message: "Thread created successfully!",
-      threads: threadList,
+      thread: newThread,
     });
+    
+  } catch (error) {
+    console.error("Error creating thread", error);
+    res.status(500).json({
+      error_message: "Internal server error",
+    });
+  }
+});
+
+app.get("/api/all/threads", async (req, res) => {
+  try {
+    // Retrieve all threads from the MongoDB database
+    const threads = await Thread.find({});
+
+    res.json({
+      threads,
+    });
+  } catch (error) {
+    console.error("Error fetching threads", error);
+    res.status(500).json({
+      error_message: "Internal server error",
+    });
+  }
+});
+
+
+app.post("/api/thread/like", (req, res) => {
+	const { threadId, userId } = req.body;
+	const result = threadList.filter((thread) => thread.id === threadId);
+	const threadLikes = result[0].likes;
+
+	const authenticateReaction = threadLikes.filter((user) => user === userId);
+
+	if (authenticateReaction.length === 0) {
+		threadLikes.push(userId);
+		return res.json({
+			message: "You've reacted to the post!",
+		});
+	}
+	res.json({
+		error_message: "You can only react once!",
+	});
+});
+
+app.post("/api/thread/replies", (req, res) => {
+	const { id } = req.body;
+	const result = threadList.filter((thread) => thread.id === id);
+	res.json({
+		replies: result[0].replies,
+		title: result[0].title,
+	});
+});
+
+app.post("/api/create/reply", async (req, res) => {
+	const { id, userId, reply } = req.body;
+	const result = threadList.filter((thread) => thread.id === id);
+	const username = users.filter((user) => user.id === userId);
+	result[0].replies.unshift({ name: username[0].username, text: reply });
+
+	 await novu.trigger("topicnotification", {
+	 	to: [{ type: "Topic", topicKey: id }],
+	 });
+
+	res.json({
+		message: "Response added successfully!",
+	});
+});
+
   });
   
-app.get("/api/all/threads", async (req, res) => {
-    res.json({
-        threads: threadList,
-    });
-});
 
 
 app.listen(PORT, () => {
