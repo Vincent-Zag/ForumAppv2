@@ -6,12 +6,12 @@
 	font-family: "Space Grotesk", sans-serif;
 }
 
-body {
+/* body {
 	background-image: url("../assets/background.jpg");
 	background-size: cover; 
 	background-position: center center;
 	background-attachment: fixed; 
-}
+} */
 
 input {
 	padding: 10px 20px;
@@ -116,4 +116,28 @@ a {
 	margin-left: 15px;
 	cursor: pointer;
 	border-radius: 3px;
+}
+
+.thread__container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	padding: 20px;
+}
+
+.likes__container {
+	display: flex;
+	align-items: center;
+	margin-right: 25px;
+}
+.likesBtn {
+	height: 30px;
+	color: #83833c;
+	cursor: pointer;
+}
+.react__container {
+	display: flex;
+	align-items: center;
 }
