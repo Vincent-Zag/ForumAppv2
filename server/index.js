@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require('mongoose');
+const validator = require('email-validator');
 const cors = require("cors");
 const app = express();
 const PORT = 4000;
-const generateID = () => Math.random().toString(36).substring(2, 10);
 
 // Connect to MongoDB
 mongoose.connect("mongodb+srv://admin:password1231@forumthreads.wdom9t6.mongodb.net/forums", {
@@ -21,7 +21,10 @@ mongoose.connect("mongodb+srv://admin:password1231@forumthreads.wdom9t6.mongodb.
 // Define Schemas
 
 const userSchema = new mongoose.Schema({
-  email: String,
+  email: {
+    type: String,
+    required: true
+  },
   password: String,
   username: String,
 });
@@ -40,15 +43,41 @@ const threadSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 const Thread = mongoose.model('Thread', threadSchema);
-const threadList = [];
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
 
+// This endpoint fetches the user information
+app.get("/api/user/:id", async (req, res) => {
+    // Retrieve the user by id
+    await User.findById(req.params.id)
+      .then(userFound => {
+        if(!userFound){
+          return res.status(404).json({
+            error: "Could not find user with that id.",
+          });
+        }
+        return res.status(200).json(userFound);
+      })
+      .catch(err => {
+        console.error("Error fetching user information", err);
+        res.status(500).json({
+          error_message: "Internal server error",
+        });      
+      });
+});
+
 app.post("/api/register", async (req, res) => {
   const { email, password, username } = req.body;
+
+  //check for valid email address first
+  if(!validator.validate(email)){
+    return res.status(422).json({
+      error: "Invalid email, please try again!"
+    });
+  }
 
   try {
     const existingUser = await User.findOne({ email });
@@ -99,7 +128,6 @@ app.post("/api/login", async (req, res) => {
   });
 
 
-// Forums
 // Forums
 app.post("/api/create/thread", async (req, res) => {
   const { thread, userId } = req.body;
@@ -223,8 +251,6 @@ app.post("/api/create/reply", async (req, res) => {
     });
   }
 });
-
-
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
