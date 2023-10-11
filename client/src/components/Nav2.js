@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Nav = () => {
+const NavPro = () => {
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleHome = (e) => {
         e.preventDefault();
-        navigate("/profile");
+        navigate("/dashboard");
     };
 
     const signOut = () => {
@@ -17,7 +17,7 @@ const Nav = () => {
     return (
         <nav className='navbar'>
             <div className="'navbarRight">
-                <h2 onClick={handleSubmit}>User Profile</h2>
+                <h2 onClick={handleHome}>Home</h2>
             </div>
             <div className='navbarRight'>
                 <button onClick={signOut}>Sign out</button>
@@ -26,4 +26,4 @@ const Nav = () => {
     );
 };
 
-export default Nav;
+export default NavPro;
