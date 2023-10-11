@@ -17,7 +17,7 @@ const Likes = ({ numberOfLikes, threadId }) => {
 				if (data.error_message) {
 					alert(data.error_message);
 				} else {
-					alert(data.message);
+					window.location.reload();
 				}
 			})
 			.catch((err) => console.error(err));
