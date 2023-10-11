@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 
 * {
     box-sizing: border-box;
@@ -6,12 +6,12 @@
     padding: 0;
     font-family: "Space Grotesk", sans-serif;
 }
-/* body {
+body {
 	background-image: url("../assets/background.jpg");
 	background-size: cover; 
 	background-position: center center;
 	background-attachment: fixed; 
-} */
+}
 
 input {
     padding: 10px 20px;
@@ -89,4 +89,21 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+} */
+
+.testLogin {
+	width: 30rem;
+	margin: auto;
+	align-items: center;
+	padding: 2rem;
+	border-radius: 10px;
+	margin-top: 200px;
+}
+
+.loginInput {
+	margin-bottom: 30px;
+}
+
+.testTitle.card-title {
+	margin-bottom: 48px;
 }
