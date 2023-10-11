@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 const Nav = () => {
     const navigate = useNavigate();
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate("/dashboard");
+    };
+
     const signOut = () => {
 		localStorage.removeItem("_id");
 		navigate("/");
@@ -11,7 +16,9 @@ const Nav = () => {
 
     return (
         <nav className='navbar'>
-            <h2>TBD</h2>
+            <div className="'navbarLeft">
+                <h2 onClick={handleSubmit}>User Profile</h2>
+            </div>
             <div className='navbarRight'>
                 <button onClick={signOut}>Sign out</button>
             </div>
