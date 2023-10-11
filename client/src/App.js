@@ -11,21 +11,18 @@ import "bootswatch/dist/quartz/bootstrap.min.css";
 import NavComponent from "./components/NavComponent";
 
 const App = () => {
-  return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Home />} />
-          <Route path="/profile/:userId" element={<Profile />} /> 
-          <Route path="/profile/:userId" element={<NavComponent />} />
-          <Route path="/:id/replies" element={<Replies />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+    return (
+        <div>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/dashboard' element={<Home/>} />
+                    <Route path='/:id/replies' element={<Replies />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 };
 
 export default App;
