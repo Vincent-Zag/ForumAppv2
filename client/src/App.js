@@ -9,6 +9,7 @@ import Profile from "./components/Profile";
 import NavComponent from "./components/NavComponent";
 import "bootswatch/dist/quartz/bootstrap.min.css";
 import Profile from "./components/Profile";
+import Landing from "./components/Landing";
 
 const App = () => {
   return (
