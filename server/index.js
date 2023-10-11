@@ -18,18 +18,24 @@ mongoose.connect("mongodb+srv://admin:password1231@forumthreads.wdom9t6.mongodb.
   });
 
 
-// Define a User schema
+// Define Schemas
+
 const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   username: String,
 });
 
+const replySchema = new mongoose.Schema({
+  name: String, 
+  text: String, 
+});
+
 const threadSchema = new mongoose.Schema({
-    title: String,
-    userId: String,
-    replies: [String],
-    likes: [String],   
+  title: String,
+  userId: String,
+  replies: [replySchema],
+  likes: [String],   
 });
 
 const User = mongoose.model('User', userSchema);
@@ -133,48 +139,91 @@ app.get("/api/all/threads", async (req, res) => {
 });
 
 
-app.post("/api/thread/like", (req, res) => {
-	const { threadId, userId } = req.body;
-	const result = threadList.filter((thread) => thread.id === threadId);
-	const threadLikes = result[0].likes;
+app.post("/api/thread/like", async (req, res) => {
+  const { threadId, userId } = req.body;
+  try {
+    const thread = await Thread.findById(threadId);
+    if (!thread) {
+      return res.status(404).json({
+        error_message: "Thread not found",
+      });
+    }
 
-	const authenticateReaction = threadLikes.filter((user) => user === userId);
+    const threadLikes = thread.likes;
+    const isLiked = threadLikes.includes(userId);
 
-	if (authenticateReaction.length === 0) {
-		threadLikes.push(userId);
-		return res.json({
-			message: "You've reacted to the post!",
-		});
-	}
-	res.json({
-		error_message: "You can only react once!",
-	});
+    if (isLiked) {
+      threadLikes.pull(userId);
+    } else {
+      threadLikes.push(userId);
+    }
+    await thread.save();
+    res.json({
+      message: isLiked ? "You've unliked the post!" : "You've liked the post!",
+    });
+  } catch (error) {
+    console.error("Error during liking/unliking thread", error);
+    res.status(500).json({
+      error_message: "Internal server error",
+    });
+  }
 });
 
-app.post("/api/thread/replies", (req, res) => {
-	const { id } = req.body;
-	const result = threadList.filter((thread) => thread.id === id);
-	res.json({
-		replies: result[0].replies,
-		title: result[0].title,
-	});
+
+app.post("/api/thread/replies", async (req, res) => {
+  const { id } = req.body;
+  try {
+    const thread = await Thread.findById(id);
+    if (!thread) {
+      return res.status(404).json({
+        error_message: "Thread not found",
+      });
+    }
+    res.json({
+      replies: thread.replies,
+      title: thread.title,
+    });
+  } catch (error) {
+    console.error("Error fetching thread replies", error);
+    res.status(500).json({
+      error_message: "Internal server error",
+    });
+  }
 });
+
 
 app.post("/api/create/reply", async (req, res) => {
-	const { id, userId, reply } = req.body;
-	const result = threadList.filter((thread) => thread.id === id);
-	const username = users.filter((user) => user.id === userId);
-	result[0].replies.unshift({ name: username[0].username, text: reply });
+  const { id, userId, reply } = req.body;
+  try {
+    const thread = await Thread.findById(id);
+    if (!thread) {
+      return res.status(404).json({
+        error_message: "Thread not found",
+      });
+    }
+    const user = await User.findById(userId);
 
-	 await novu.trigger("topicnotification", {
-	 	to: [{ type: "Topic", topicKey: id }],
-	 });
+    if (!user) {
+      return res.status(404).json({
+        error_message: "User not found",
+      });
+    }
+    const username = user.username;
 
-	res.json({
-		message: "Response added successfully!",
-	});
+    thread.replies.unshift({ name: username, text: reply });
+    await thread.save();
+
+    res.json({
+      message: "Response added successfully!",
+    });
+  } catch (error) {
+    console.error("Error creating reply", error);
+    res.status(500).json({
+      error_message: "Internal server error",
+    });
+  }
 });
-  
+
 
 
 app.listen(PORT, () => {

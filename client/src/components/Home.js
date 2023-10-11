@@ -18,8 +18,8 @@ const Home = () => {
                 fetch("http://localhost:4000/api/all/threads")
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log("Received data:", data); // Log the data
-                        setThreadList(data.threads || []); // Initialize as an empty array if data.threads is undefined
+                        console.log("Received data:", data);
+                        setThreadList(data.threads || []); 
                     })
                     .catch((err) => console.error(err));
             }
