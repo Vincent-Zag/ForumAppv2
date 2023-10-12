@@ -19,7 +19,6 @@ mongoose.connect("mongodb+srv://admin:password1231@forumthreads.wdom9t6.mongodb.
 
 
 // Define Schemas
-
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -50,9 +49,9 @@ app.use(cors());
 
 
 // This endpoint fetches the user information
-app.get("/api/user/:id", async (req, res) => {
+app.get("/api/user/:id", (req, res) => {
     // Retrieve the user by id
-    await User.findById(req.params.id)
+    User.findById(req.params.id)
       .then(userFound => {
         if(!userFound){
           return res.status(404).json({
@@ -91,7 +90,7 @@ app.post("/api/register", async (req, res) => {
     const newUser = new User({ email, password, username });
     await newUser.save();
 
-    res.json({
+    res.status(201).json({
       message: "Account created successfully!",
     });
   } catch (error) {
