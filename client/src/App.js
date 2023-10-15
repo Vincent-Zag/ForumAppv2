@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Replies from "./components/Replies";
 import Landing from "./components/Landing";
+import "bootswatch/dist/quartz/bootstrap.min.css";
 
 const App = () => {
 	return (
