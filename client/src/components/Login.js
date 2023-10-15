@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import "../styles/Login.css";
+import NavComponent from "./NavComponent";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
@@ -45,56 +46,64 @@ const Login = () => {
 	};
 
 	return (
-		<Card className="testLogin">
-			<Card.Body>
-				<Card.Title className="testTitle">Login</Card.Title>
-				<Form onSubmit={handleSubmit}>
-					<Form.Group className="mb-3" controlId="formBasicEmail">
-						<FloatingLabel
-							controlId="floatingInput"
-							label="Email"
-							className="mb-3"
-						>
-							<Form.Control
-								className="loginInput"
-								type="email"
-								placeholder="Email"
-								name="email"
-								required
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-							/>
-						</FloatingLabel>
-					</Form.Group>
+		<>
+			<NavComponent />
+			<Card className="testLogin">
+				<Card.Body>
+					<Card.Title className="testTitle">Login</Card.Title>
+					<Form onSubmit={handleSubmit}>
+						<Form.Group className="mb-3" controlId="formBasicEmail">
+							<FloatingLabel
+								controlId="floatingInput"
+								label="Email"
+								className="mb-3"
+							>
+								<Form.Control
+									className="loginInput"
+									type="email"
+									placeholder="Email"
+									name="email"
+									required
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+								/>
+							</FloatingLabel>
+						</Form.Group>
 
-					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<FloatingLabel
-							controlId="floatingPassword"
-							label="Password"
+						<Form.Group
+							className="mb-3"
+							controlId="formBasicPassword"
 						>
-							<Form.Control
-								className="loginInput"
-								type="password"
-								placeholder="Password"
-								name="password"
-								required
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-							/>
-						</FloatingLabel>
-					</Form.Group>
-					<div className="d-grid gap-2">
-						<Button variant="primary" type="submit">
-							Submit
-						</Button>
-						<p>
-							Don't have an account?{" "}
-							<Link to="/register">Create one</Link>
-						</p>
-					</div>
-				</Form>
-			</Card.Body>
-		</Card>
+							<FloatingLabel
+								controlId="floatingPassword"
+								label="Password"
+							>
+								<Form.Control
+									className="loginInput"
+									type="password"
+									placeholder="Password"
+									name="password"
+									required
+									value={password}
+									onChange={(e) =>
+										setPassword(e.target.value)
+									}
+								/>
+							</FloatingLabel>
+						</Form.Group>
+						<div className="d-grid gap-2">
+							<Button variant="primary" type="submit">
+								Submit
+							</Button>
+							<p>
+								Don't have an account?{" "}
+								<Link to="/register">Create one</Link>
+							</p>
+						</div>
+					</Form>
+				</Card.Body>
+			</Card>
+		</>
 	);
 };
 

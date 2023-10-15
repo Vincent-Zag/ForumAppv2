@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "../styles/Register.css";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
+import NavComponent from "./NavComponent";
 
 const Register = () => {
 	const [username, setUsername] = useState("");
@@ -45,79 +46,92 @@ const Register = () => {
 		setPassword("");
 	};
 	return (
-		<Card className="test">
-			<Card.Body>
-				<Card.Title className="testTitle">Register</Card.Title>
-				<Form className="formTest" onSubmit={handleSubmit}>
-					<Form.Group className="mb-3" controlId="formBasicUsername">
-						<FloatingLabel
-							controlId="floatingUsername"
-							label="Username"
-						>
-							<Form.Control
-								className="registerInput"
-								type="username"
-								placeholder="Username"
-								name="username"
-								required
-								value={username}
-								onChange={(e) => setUsername(e.target.value)}
-							/>
-						</FloatingLabel>
-					</Form.Group>
-
-					<Form.Group className="mb-3" controlId="formBasicEmail">
-						<FloatingLabel
-							controlId="floatingInput"
-							label="Email"
+		<>
+			<NavComponent />
+			<Card className="test">
+				<Card.Body>
+					<Card.Title className="testTitle">Register</Card.Title>
+					<Form className="formTest" onSubmit={handleSubmit}>
+						<Form.Group
 							className="mb-3"
+							controlId="formBasicUsername"
 						>
-							<Form.Control
-								className="registerInput"
-								type="email"
-								placeholder="Email"
-								name="email"
-								required
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-							/>
-						</FloatingLabel>
-					</Form.Group>
+							<FloatingLabel
+								controlId="floatingUsername"
+								label="Username"
+							>
+								<Form.Control
+									className="registerInput"
+									type="username"
+									placeholder="Username"
+									name="username"
+									required
+									value={username}
+									onChange={(e) =>
+										setUsername(e.target.value)
+									}
+								/>
+							</FloatingLabel>
+						</Form.Group>
 
-					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<FloatingLabel
-							controlId="floatingPassword"
-							label="Password"
+						<Form.Group className="mb-3" controlId="formBasicEmail">
+							<FloatingLabel
+								controlId="floatingInput"
+								label="Email"
+								className="mb-3"
+							>
+								<Form.Control
+									className="registerInput"
+									type="email"
+									placeholder="Email"
+									name="email"
+									required
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+								/>
+							</FloatingLabel>
+						</Form.Group>
+
+						<Form.Group
+							className="mb-3"
+							controlId="formBasicPassword"
 						>
-							<Form.Control
-								type="password"
-								placeholder="Password"
-								name="password"
-								required
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-							/>
-						</FloatingLabel>
-						<Form.Text id="passwordHelpBlock" muted>
-							This is where I'd put descriptions on password
-							restrictions.
-						</Form.Text>
-					</Form.Group>
-					<div className="d-grid gap-2">
-						<Button
-							className="registerButton"
-							variant="primary"
-							type="submit"
-						>
-							Create Account
-						</Button>
-						<p>
-							Have an account? <Link to="/">Sign in</Link>
-						</p>
-					</div>
-				</Form>
-			</Card.Body>
-		</Card>
+							<FloatingLabel
+								controlId="floatingPassword"
+								label="Password"
+							>
+								<Form.Control
+									type="password"
+									placeholder="Password"
+									name="password"
+									required
+									value={password}
+									onChange={(e) =>
+										setPassword(e.target.value)
+									}
+								/>
+							</FloatingLabel>
+							<Form.Text id="passwordHelpBlock" muted>
+								This is where I'd put descriptions on password
+								restrictions.
+							</Form.Text>
+						</Form.Group>
+						<div className="d-grid gap-2">
+							<Button
+								className="registerButton"
+								variant="primary"
+								type="submit"
+							>
+								Create Account
+							</Button>
+							<p>
+								Have an account? <Link to="/">Sign in</Link>
+							</p>
+						</div>
+					</Form>
+				</Card.Body>
+			</Card>
+		</>
 	);
 };
 
