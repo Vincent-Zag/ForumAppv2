@@ -1,53 +1,77 @@
-import React, { useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import Register from "./Register";
-import NavPro from "./Nav2";
-import '../styles/Home.css';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import NavPro from "./Nav";
 
-const Profile = (() => {
-    const { id } = useParams();
-    const [profile, setProfile] = useState("");
+const Profile = () => {
+  const { userId } = useParams();
+  const [profile, setProfile] = useState(null);
+  const [repliesCount, setRepliesCount] = useState(0);
+  const [likesCount, setLikesCount] = useState(0);
+  
 
-    const dispProfile = (() => {
-		fetch("http://localhost:4000/api/profile", {
-			method: "POST",
-			body: JSON.stringify({
-				id,
-				userId: localStorage.getItem("_id"),
-                profile
-			}),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				alert(data.message);
-				//navigate("/profile");
-			})
-			.catch((err) => console.error(err));
-        dispProfile()
-	}, [id]);
-	/*const handleSubmitReply = (e) => {
-		e.preventDefault();
-		addReply();
-		setReply("");
-	}; */
+  useEffect(() => {
+    if (userId) {
+      fetch(`http://localhost:4000/api/user/${userId}/profile`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.profile) {
+            setProfile(data.profile);
+          } else {
+            console.error("User profile not found");
+          }
+        })
+        .catch((err) => console.error(err));
 
-    return (
-        <>
-            <NavPro />
-            <main className='profile'>
-                <h2 className='profileTitle'>Profile Page</h2>
-                    <div className='profile__container'>
-                        <h3>UserName: {profile.username}</h3>
-                        <h3>UserName: mprodhan</h3>
-                        <h3>email: {profile.email}</h3>
-                        <h3>email: mustafizur.prodhan2@gmail.com</h3>
-                    </div>
-            </main>
-        </>
-    );
-});
+      fetch(`http://localhost:4000/api/user/${userId}/replies`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.count) {
+            setRepliesCount(data.count);
+          } else {
+            console.error("Error fetching replies count");
+          }
+        })
+        .catch((err) => console.error(err));
+
+      fetch(`http://localhost:4000/api/user/${userId}/likes`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.count) {
+            setLikesCount(data.count);
+          } else {
+            console.error("Error fetching likes count");
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+
+  }, [userId]);
+
+
+    console.log("Profile data:", profile);
+    console.log("Replies count:", repliesCount);
+    console.log("Likes count:", likesCount);
+
+
+
+
+
+  return (
+    <>
+      <NavPro />
+      <main className="profile">
+        <h2 className="profileTitle">Profile Page</h2>
+        {profile && (
+          <div className="profile__container">
+            <h3>Username: {profile.username}</h3>
+            <h3>Email: {profile.email}</h3>
+            <h3>Number of Replies: {repliesCount}</h3>
+            <h3>Number of Likes: {likesCount}</h3>
+          </div>
+        )}
+      </main>
+    </>
+  );
+};
 
 export default Profile;
