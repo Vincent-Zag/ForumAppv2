@@ -7,7 +7,6 @@ const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [repliesCount, setRepliesCount] = useState(0);
   const [likesCount, setLikesCount] = useState(0);
-  
 
   useEffect(() => {
     if (userId) {
@@ -44,17 +43,7 @@ const Profile = () => {
         })
         .catch((err) => console.error(err));
     }
-
   }, [userId]);
-
-
-    console.log("Profile data:", profile);
-    console.log("Replies count:", repliesCount);
-    console.log("Likes count:", likesCount);
-
-
-
-
 
   return (
     <>
