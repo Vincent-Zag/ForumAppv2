@@ -18,6 +18,8 @@ const Nav = () => {
         }
     };
 
+   
+
     const signOut = () => {
 		localStorage.removeItem("_id");
 		navigate("/");
