@@ -1,0 +1,31 @@
+.centered-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center; /* Optionally center text horizontally */
+}
+
+.top-row {
+	margin-top: 100px;
+}
+
+.bottom-row {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	margin-top: 100px;
+}
+
+.right-aligned-col {
+	position: relative;
+	left: 250px; /* Adjust the value as needed */
+}
+
+.call-to-action {
+	margin-top: 200px;
+	text-align: center;
+}
+
+.call-to-action.h2 {
+}
