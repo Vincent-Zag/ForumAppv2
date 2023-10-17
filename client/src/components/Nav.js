@@ -7,6 +7,7 @@ const Nav = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         navigate("/profile");
+        navigate("/profile");
     };
 
     const loggedInUserId = localStorage.getItem("userId");
@@ -30,8 +31,7 @@ const Nav = () => {
                 <h2 onClick={handleSubmit}>User Profile</h2>
 =======
             <div className="'navbarLeft">
-                <h2 onClick={handleProfile}>User Profile</h2>
->>>>>>> a11669a (added routes to check users replies and likes with new schemas(need more looking into))
+                <h2 onClick={handleSubmit}>User Profile</h2>
             </div>
             <div className='navbarRight'>
                 <button onClick={signOut}>Sign out</button>
