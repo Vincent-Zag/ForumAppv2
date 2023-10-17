@@ -5,23 +5,24 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Replies from "./components/Replies";
 import Landing from "./components/Landing";
+import Profile from "./components/Profile"; 
 import "bootswatch/dist/quartz/bootstrap.min.css";
 
 const App = () => {
-	return (
-		<div>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Login />} />
-					<Route path="/landing" element={<Landing />} />
-					<Route path="/register" element={<Register />} />
-					<Route path="/dashboard" element={<Home />} />
-					<Route path="/:id/replies" element={<Replies />} />
-                    <Route path='/profile' element={<Profile />} />
-				</Routes>
-			</BrowserRouter>
-		</div>
-	);
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Home />} />
+          <Route path="/profile/:userId" element={<Profile />} /> 
+          <Route path="/:id/replies" element={<Replies />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 };
 
 export default App;
