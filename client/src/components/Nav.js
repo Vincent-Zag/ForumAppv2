@@ -25,8 +25,13 @@ const Nav = () => {
 
     return (
         <nav className='navbar'>
+<<<<<<< HEAD
             <div className="'navbarRight">
                 <h2 onClick={handleSubmit}>User Profile</h2>
+=======
+            <div className="'navbarLeft">
+                <h2 onClick={handleProfile}>User Profile</h2>
+>>>>>>> a11669a (added routes to check users replies and likes with new schemas(need more looking into))
             </div>
             <div className='navbarRight'>
                 <button onClick={signOut}>Sign out</button>
