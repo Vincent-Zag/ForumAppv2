@@ -7,16 +7,6 @@ const Nav = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         navigate("/profile");
-        navigate("/profile");
-    };
-
-    const loggedInUserId = localStorage.getItem("userId");
-
-    const handleProfile = (e) => {
-        e.preventDefault();
-        if (loggedInUserId) {
-        navigate(`/profile/${loggedInUserId}`);
-        }
     };
 
     const loggedInUserId = localStorage.getItem("userId");
@@ -35,12 +25,8 @@ const Nav = () => {
 
     return (
         <nav className='navbar'>
-<<<<<<< HEAD
             <div className="'navbarRight">
                 <h2 onClick={handleSubmit}>User Profile</h2>
-=======
-            <div className="'navbarLeft">
-                <h2 onClick={handleProfile}>User Profile</h2>
             </div>
             <div className='navbarRight'>
                 <button onClick={signOut}>Sign out</button>
