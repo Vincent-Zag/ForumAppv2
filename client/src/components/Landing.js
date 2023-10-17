@@ -1,11 +1,11 @@
 import React from "react";
-import Nav from "./Nav";
+import NavComponent from "./NavComponent";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import "../styles/Landing.css";
 import forumImage from "../assets/forum.jpg";
 import topicImage from "../assets/idea.png";
 import cloudImage from "../assets/cloud.png";
-import securityImage from "../assets/security.png";
+import likeImage from "../assets/like.png";
 import { Link, useNavigate } from "react-router-dom";
 
 function Landing() {
@@ -13,7 +13,7 @@ function Landing() {
 
 	return (
 		<>
-			<Nav />
+			<NavComponent />
 			<Container>
 				<Row className="top-row">
 					<Col className="call-to-action">
@@ -39,17 +39,14 @@ function Landing() {
 				</Row>
 				<Row className="bottom-row">
 					<Col>
-						<Card
-							style={{ width: "18rem" }}
-							className="centered-card"
-						>
+						<Card className="centered-card">
 							<Card.Img
 								variant="top"
 								src={topicImage}
 								style={{ width: "200px", height: "200px" }}
 							/>
 							<Card.Body>
-								<Card.Title>Browse Content By Topic</Card.Title>
+								<Card.Title>Browse By Topic</Card.Title>
 								<Card.Text>
 									Browse content based on categories for
 									discussion.
@@ -58,10 +55,23 @@ function Landing() {
 						</Card>
 					</Col>
 					<Col>
-						<Card
-							style={{ width: "18rem" }}
-							className="centered-card"
-						>
+						<Card className="centered-card">
+							<Card.Img
+								variant="top"
+								src={likeImage}
+								style={{ width: "200px", height: "200px" }}
+							/>
+							<Card.Body>
+								<Card.Title>Like and Comment</Card.Title>
+								<Card.Text>
+									Interact with posts to boost engagement
+									metrics.
+								</Card.Text>
+							</Card.Body>
+						</Card>
+					</Col>
+					<Col>
+						<Card className="centered-card">
 							<Card.Img
 								variant="top"
 								src={cloudImage}
@@ -72,25 +82,6 @@ function Landing() {
 								<Card.Text>
 									Data is secure using modern cloud
 									technology.
-								</Card.Text>
-							</Card.Body>
-						</Card>
-					</Col>
-					<Col>
-						<Card
-							style={{ width: "18rem" }}
-							className="centered-card"
-						>
-							<Card.Img
-								variant="top"
-								src={securityImage}
-								style={{ width: "200px", height: "200px" }}
-							/>
-							<Card.Body>
-								<Card.Title>JWT Authorization</Card.Title>
-								<Card.Text>
-									Forum use is secure and only authorized
-									users can post.
 								</Card.Text>
 							</Card.Body>
 						</Card>

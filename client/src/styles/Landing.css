@@ -4,17 +4,19 @@
 	justify-content: center;
 	align-items: center;
 	text-align: center; /* Optionally center text horizontally */
+	width: 20rem;
+	padding: 10px;
 }
 
 .top-row {
-	margin-top: 100px;
+	margin-top: 100px !important;
 }
 
 .bottom-row {
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
-	margin-top: 100px;
+	margin-top: 100px !important;
 }
 
 .right-aligned-col {
@@ -23,9 +25,13 @@
 }
 
 .call-to-action {
-	margin-top: 200px;
+	margin-top: 200px !important;
 	text-align: center;
 }
 
 .call-to-action.h2 {
+}
+
+.body {
+	background-color: aqua !important;
 }
