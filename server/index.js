@@ -7,10 +7,11 @@ const app = express();
 const PORT = 4000;
 
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://admin:password1231@forumthreads.wdom9t6.mongodb.net/forums", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose
+  .connect("mongodb+srv://admin:password1231@forumthreads.wdom9t6.mongodb.net/forums", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -256,7 +257,7 @@ app.get("/api/thread/replies/:threadId", async (req, res) => {
     const thread = await Thread.findById(threadId);
     if (!thread) {
       return res.status(404).json({
-        error_message: "Thread not found",
+        error_message: "User replies not found",
       });
     }
 
@@ -265,13 +266,12 @@ app.get("/api/thread/replies/:threadId", async (req, res) => {
       replies: thread.replies,
     });
   } catch (error) {
-    console.error("Error fetching thread replies", error);
+    console.error("Error fetching user replies", error);
     res.status(500).json({
       error_message: "Internal server error",
     });
   }
 });
-
 
 app.post("/api/create/reply", async (req, res) => {
   if (req.session.user) {
@@ -305,6 +305,56 @@ app.post("/api/create/reply", async (req, res) => {
     res.status(401).json({ error: "Unauthorized" });
   }
 });
+
+//User based Stats
+
+app.get("/api/user/:userId/replies", async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const userReplies = await Thread.find({ "replies.userId": userId });
+
+    if (!userReplies) {
+      return res.status(404).json({
+        error_message: "User replies not found",
+      });
+    }
+
+    const replies = userReplies.map((thread) =>
+      thread.replies.filter((reply) => reply.userId === userId)
+    );
+
+    res.json({
+      replies,
+    });
+  } catch (error) {
+    console.error("Error fetching user replies", error);
+    res.status(500).json({
+      error_message: "Internal server error",
+    });
+  }
+});
+
+app.get("/api/user/:userId/likes", async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const userLikes = await Like.find({ userId });
+
+    res.json({
+      likes: userLikes,
+    });
+  } catch (error) {
+    console.error("Error fetching user likes", error);
+    res.status(500).json({
+      error_message: "Internal server error",
+    });
+  }
+});
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

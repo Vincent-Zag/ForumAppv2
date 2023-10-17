@@ -8,6 +8,9 @@ const Profile = () => {
   // const [repliedThreads, setRepliedThreads] = useState([]);
   // const [likedThreads, setLikedThreads] = useState([]);
 
+  const [repliesCount, setRepliesCount] = useState(0);
+  const [likesCount, setLikesCount] = useState(0);
+
   useEffect(() => {
     if (userId) {
       fetch(`http://localhost:4000/api/user/${userId}/profile`)
