@@ -82,12 +82,14 @@ a {
 }
 .thread__item {
 	padding: 10px;
-	width: 80%;
+	width: 800px;
 	box-shadow: 0 0 1px 1px #0a4442;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
 }
 .navbar {
 	width: 100%;
@@ -139,5 +141,61 @@ a {
 }
 .react__container {
 	display: flex;
+	justify-content: flex-end;
+}
+
+.button-col.col {
+	flex: 0 0 200px;
+	display: flex;
+	justify-content: flex-end;
+	width: 180px;
+}
+
+.thread-button {
+	width: 180px;
+	height: 50px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.input-thread-title.form-control {
+	width: 100%;
+}
+
+.mb-3 {
+	width: 100%;
+}
+
+.container-title {
+	margin: auto;
+	width: 50%;
+	text-align: center;
+}
+
+.container-title.h5 {
+	font-size: 32px;
+}
+
+.create-thread-container {
+	width: 1320px;
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.thread-container {
+	width: 1320px;
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	flex-direction: column;
 	align-items: center;
+	justify-content: center;
+}
+
+.thread-title {
+	margin-bottom: 32px;
+}
+
+.thread-item-title {
 }

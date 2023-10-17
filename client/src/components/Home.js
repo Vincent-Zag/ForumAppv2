@@ -4,6 +4,7 @@ import NavComponent from "./NavComponent";
 import Likes from "../utils/Likes";
 import Comments from "../utils/Comments";
 import "../styles/Home.css";
+import { Card, Form, Button, Row, Col } from "react-bootstrap";
 
 const Home = () => {
 	const [thread, setThread] = useState("");
@@ -56,48 +57,89 @@ const Home = () => {
 	return (
 		<>
 			<NavComponent />
-			<main className="home">
-				<h2 className="homeTitle">Create a Thread</h2>
-				<form className="homeForm" onSubmit={handleSubmit}>
-					<div className="home__container">
-						<label htmlFor="thread">Title / Description</label>
-						<input
-							type="text"
-							name="thread"
-							required
-							value={thread}
-							onChange={(e) => setThread(e.target.value)}
-						/>
-					</div>
-					<button className="homeBtn">CREATE THREAD</button>
-				</form>
+			<Card className="create-thread-container">
+				<Card.Body>
+					<Card.Title className="container-title">
+						Create a Thread
+					</Card.Title>
+					<Form onSubmit={handleSubmit}>
+						<Row>
+							<Col>
+								<Form.Group
+									className="mb-3"
+									controlId="formBasicEmail"
+								>
+									<Form.Label>Title</Form.Label>
+									<Form.Control
+										type="input"
+										placeholder="Title"
+										className="input-thread-title"
+										value={thread}
+										onChange={(e) =>
+											setThread(e.target.value)
+										}
+									/>
+								</Form.Group>
+							</Col>
+							<Col className="button-col">
+								<Button
+									variant="primary"
+									type="submit"
+									className="thread-button"
+								>
+									Create Thread
+								</Button>
+							</Col>
+						</Row>
+						{/* <Form.Group className="mb-3" controlId="textarea">
+							<Form.Label>Description</Form.Label>
+							<Form.Control
+								as="textarea"
+								rows={3}
+								placeholder="Description"
+							/>
+						</Form.Group> */}
+					</Form>
+				</Card.Body>
+			</Card>
 
-				<h3>Threads</h3>
-				<p></p>
-
-				<div className="thread__container">
+			<Card className="thread-container">
+				<Card.Body style={{ width: "100%" }}>
+					<Card.Title className="container-title thread-title">
+						Threads
+					</Card.Title>
 					{threadList.map((thread) => (
-						<div className="thread__item" key={thread._id}>
-							<p>{thread.title}</p>
-							<div className="react__container">
-								{thread.likes && (
-									<Likes
-										numberOfLikes={thread.likes.length}
-										threadId={thread._id}
-									/>
-								)}
-								{thread.replies && (
-									<Comments
-										numberOfComments={thread.replies.length}
-										threadId={thread._id}
-										title={thread.title}
-									/>
-								)}
-							</div>
-						</div>
+						<Card
+							className="thread__item"
+							key={thread._id}
+							style={{ width: "100%" }}
+						>
+							<Row>
+								<Col className="thread-item-title">
+									<p>{thread.title}</p>
+								</Col>
+								<Col xs={1} className="react__container">
+									{thread.likes && (
+										<Likes
+											numberOfLikes={thread.likes.length}
+											threadId={thread._id}
+										/>
+									)}
+									{thread.replies && (
+										<Comments
+											numberOfComments={
+												thread.replies.length
+											}
+											threadId={thread._id}
+											title={thread.title}
+										/>
+									)}
+								</Col>
+							</Row>
+						</Card>
 					))}
-				</div>
-			</main>
+				</Card.Body>
+			</Card>
 		</>
 	);
 };
