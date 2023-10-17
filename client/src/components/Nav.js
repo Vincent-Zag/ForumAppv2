@@ -34,6 +34,7 @@ const Nav = () => {
 
     return (
         <nav className='navbar'>
+<<<<<<< HEAD
             <div className="'navbarRight">
                 <h2 onClick={handleSubmit}>User Profile</h2>
             <div className="'navbarLeft">
