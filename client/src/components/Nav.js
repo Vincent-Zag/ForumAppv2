@@ -7,7 +7,15 @@ const Nav = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         navigate("/profile");
-        navigate("/profile");
+    };
+
+    const loggedInUserId = localStorage.getItem("userId");
+
+    const handleProfile = (e) => {
+        e.preventDefault();
+        if (loggedInUserId) {
+        navigate(`/profile/${loggedInUserId}`);
+        }
     };
 
     const loggedInUserId = localStorage.getItem("userId");
