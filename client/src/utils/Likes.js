@@ -1,28 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Likes = ({ numberOfLikes, threadId }) => {
-	const handleLikeFunction = () => {
-		fetch("http://localhost:4000/api/thread/like", {
-			method: "POST",
-			body: JSON.stringify({
-				threadId,
-				userId: localStorage.getItem("_id"),
-			}),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.error_message) {
-					alert(data.error_message);
-				} else {
-					window.location.reload();
-				}
-			})
-			.catch((err) => console.error(err));
-	};
+  const [authenticated, setAuthenticated] = useState(false);
 
+  useEffect(() => {
+    // Check if the user is authenticated
+    fetch("http://localhost:4000/api/user/authenticated", {
+      method: "GET",
+      credentials: "include", // Include credentials for the session
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setAuthenticated(data.authenticated);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const handleLikeFunction = () => {
+    if (authenticated) {
+      fetch("http://localhost:4000/api/thread/like", {
+        method: "POST",
+        body: JSON.stringify({
+          threadId,
+          userId: localStorage.getItem("userId"),
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error_message) {
+            alert(data.error_message);
+          } else {
+            window.location.reload();
+          }
+        })
+        .catch((err) => console.error(err));
+    } else {
+      alert("You need to be authenticated to like this thread.");
+    }
+  };
 	return (
 		<div className='likes__container'>
 			<svg
