@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -9,18 +9,20 @@ import Profile from "./components/Profile";
 import NavComponent from "./components/NavComponent";
 import "bootswatch/dist/quartz/bootstrap.min.css";
 
+
 const App = () => {
+  const [ userId, setUserId ] = useState("");
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Home />} />
-          <Route path="/profile/:userId" element={<Profile />} /> 
-          <Route path="/profile/:userId" element={<NavComponent />} />
-          <Route path="/:id/replies" element={<Replies />} />
+          <Route path="/" element={<Login setUserId = {setUserId} userId = {userId}/>} />
+          <Route path="/landing" element={<Landing setUserId = {setUserId} userId = {userId}/>} />
+          <Route path="/register" element={<Register setUserId = {setUserId} userId = {userId}/>} />
+          <Route path="/dashboard" element={<Home setUserId = {setUserId} userId = {userId}/>} />
+          <Route path="/:userId/profile" element={<Profile userId = {userId} setUserId = {setUserId}/>} /> 
+          <Route path="/:userId/profile" element={<NavComponent setUserId = {setUserId} userId = {userId}/>} />
+          <Route path="/:id/replies" element={<Replies setUserId = {setUserId} userId = {userId}/>} />
         </Routes>
       </BrowserRouter>
     </div>

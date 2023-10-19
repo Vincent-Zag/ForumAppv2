@@ -6,7 +6,9 @@ import Comments from "../utils/Comments";
 import "../styles/Home.css";
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
 
-const Home = () => {
+
+const Home = (props) => {
+
 	const [thread, setThread] = useState("");
 	const [threadList, setThreadList] = useState([]);
 	const [authenticated, setAuthenticated] = useState(false); // Add authenticated state
@@ -17,7 +19,6 @@ const Home = () => {
 			fetch("http://localhost:4000/api/all/threads")
 				.then((res) => res.json())
 				.then((data) => {
-					console.log("Received data:", data);
 					setThreadList(data.threads || []);
 				})
 				.catch((err) => console.error(err));
@@ -75,7 +76,7 @@ const Home = () => {
 
 	return (
 		<>
-			<NavComponent />
+			<NavComponent setUserId = {props.setUserId} userId = {props.userId}/>
 			<Card className="create-thread-container">
 				<Card.Body>
 					<Card.Title className="container-title">
@@ -93,6 +94,7 @@ const Home = () => {
 										type="input"
 										placeholder="Title"
 										className="input-thread-title"
+										value={thread} onChange = {(e) => setThread(e.target.value)}
 									/>
 								</Form.Group>
 							</Col>

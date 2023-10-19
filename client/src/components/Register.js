@@ -7,7 +7,7 @@ import "../styles/Register.css";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 import NavComponent from "./NavComponent";
 
-const Register = () => {
+const Register = (props) => {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -47,7 +47,7 @@ const Register = () => {
 	};
 	return (
 		<>
-			<NavComponent />
+			<NavComponent setUserId = {props.setUserId} userId = {props.userId}/>
 			<Card className="test">
 				<Card.Body>
 					<Card.Title className="testTitle">Register</Card.Title>
