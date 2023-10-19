@@ -37,28 +37,30 @@ const Home = () => {
 			.catch((err) => console.error(err));
 	}, [navigate]);
 
-	const createThread = () => {
-		fetch("http://localhost:4000/api/create/thread", {
-			method: "POST",
-			body: JSON.stringify({
-				thread,
-				userId: localStorage.getItem("userId"),
-			}),
-			headers: {
-				"Content-Type": "application/json",
-			},
-			credentials: "include",
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.success) {
-					setThreadList([...threadList, data.thread]);
-					setThread("");
-				}
-				alert("Thread created successfully!");
-			})
-			.catch((err) => console.error(err));
-	};
+  const createThread = () => {
+    fetch("http://localhost:4000/api/create/thread", {
+      method: "POST",
+      body: JSON.stringify({
+        thread,
+        userId: localStorage.getItem("userId"),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setThreadList([...threadList, data.thread]); 
+          setThread("");
+        }
+        alert("Thread created successfully!");
+        window.location.reload();
+      })
+      .catch((err) => console.error(err));
+  };
+
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

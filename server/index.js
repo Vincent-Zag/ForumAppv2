@@ -6,6 +6,7 @@ const session = require("express-session");
 const app = express();
 const PORT = 4000;
 
+
 // Connect to MongoDB
 mongoose.connect("mongodb+srv://admin:password1231@forumthreads.wdom9t6.mongodb.net/forums", {
   useNewUrlParser: true,
@@ -125,13 +126,11 @@ app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email, password });
-    console.log(user);
     if (!user) {
       return res.json({
         error_message: "Incorrect credentials",
       });
     }
-    // Store the user's ID in the session
     req.session.userId = user.userId;
     res.json({
       message: "Login successfully",
@@ -218,7 +217,8 @@ app.get("/api/all/threads", async (req, res) => {
 
 app.post("/api/thread/like", async (req, res) => {
   if (req.session.user) {
-    const { threadId, userId } = req.body;
+    const { id, userId, threadId } = req.body;
+    console.log(req.body);
     try {
       const thread = await Thread.findById(threadId);
       if (!thread) {
@@ -272,10 +272,15 @@ app.get("/api/thread/replies/:threadId", async (req, res) => {
   }
 });
 
-
 app.post("/api/create/reply", async (req, res) => {
   if (req.session.user) {
-    const { id, userId, reply } = req.body;
+    const { id, userId, reply } = req.body; 
+    const isValidObjectId = mongoose.Types.ObjectId.isValid(id);
+    if (!isValidObjectId) {
+      return res.status(400).json({
+        error_message: "Invalid ObjectId format for 'id'",
+      });
+    }
     try {
       const thread = await Thread.findById(id);
       if (!thread) {
@@ -283,13 +288,14 @@ app.post("/api/create/reply", async (req, res) => {
           error_message: "Thread not found",
         });
       }
-      const user = await User.findById(userId);
+      const user = await User.find({userId: userId});
       if (!user) {
         return res.status(404).json({
           error_message: "User not found",
         });
       }
       const username = req.session.user.username;
+      console.log("username", username);
       thread.replies.unshift({ name: username, text: reply });
       await thread.save();
       res.json({
@@ -305,6 +311,8 @@ app.post("/api/create/reply", async (req, res) => {
     res.status(401).json({ error: "Unauthorized" });
   }
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
