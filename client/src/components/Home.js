@@ -55,6 +55,7 @@ const Home = () => {
           setThread("");
         }
         alert("Thread created successfully!");
+        window.location.reload();
       })
       .catch((err) => console.error(err));
   };

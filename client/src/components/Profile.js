@@ -21,28 +21,28 @@ const Profile = () => {
         })
         .catch((err) => console.error(err));
 
-    //   fetch(`http://localhost:4000/api/user/${userId}/replied-threads`)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       if (data.repliedThreads) {
-    //         setRepliedThreads(data.repliedThreads);
-    //       } else {
-    //         console.error("Error fetching replied threads");
-    //       }
-    //     })
-    //     .catch((err) => console.error(err));
+  //     fetch(`/api/user/${userId}/replies`)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         if (data.repliedThreads) {
+  //           setRepliedThreads(data.repliedThreads);
+  //         } else {
+  //           console.error("Error fetching replied threads");
+  //         }
+  //       })
+  //       .catch((err) => console.error(err));
 
-    //   fetch(`http://localhost:4000/api/user/${userId}/liked-threads`)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       if (data.likedThreads) {
-    //         setLikedThreads(data.likedThreads);
-    //       } else {
-    //         console.error("Error fetching liked threads");
-    //       }
-    //     })
-    //     .catch((err) => console.error(err));
-  }
+  //     fetch(`/api/user/${userId}/likes`)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         if (data.likedThreads) {
+  //           setLikedThreads(data.likedThreads);
+  //         } else {
+  //           console.error("Error fetching liked threads");
+  //         }
+  //       })
+  //       .catch((err) => console.error(err));
+      }
   }, [userId]);
 
   return (
