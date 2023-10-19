@@ -8,12 +8,12 @@ import cloudImage from "../assets/cloud.png";
 import likeImage from "../assets/like.png";
 import { Link, useNavigate } from "react-router-dom";
 
-function Landing() {
+function Landing(props) {
 	const navigate = useNavigate();
 
 	return (
 		<>
-			<NavComponent />
+			<NavComponent setUserId = {props.setUserId} userId = {props.userId}/>
 			<Container>
 				<Row className="top-row">
 					<Col className="call-to-action">

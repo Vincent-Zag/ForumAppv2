@@ -4,9 +4,23 @@ import Nav from "react-bootstrap/Nav";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/NavComponent.css";
 
-const NavComponent = () => {
+const NavComponent = (props) => {
   const navigate = useNavigate();
-  const { userId } = useParams();
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // Check if the user is authenticated
+    fetch("http://localhost:4000/api/user/authenticated", {
+      method: "GET",
+      credentials: "include", 
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setAuthenticated(data.authenticated);
+        props.setUserId(data.userId);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const handleLanding = (e) => {
     navigate("/landing");
@@ -18,10 +32,10 @@ const NavComponent = () => {
   };
 
   const handleProfile = (e) => {
-    
     e.preventDefault();
-    if (userId) {
-      navigate(`/profile/${userId}`);
+    console.log(props.userId); // Check if userId is defined
+    if (props.userId) {
+      navigate(`/${props.userId}/profile`, {state:{authenticated}});
     }
   };
 
