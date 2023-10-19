@@ -6,7 +6,9 @@ import Comments from "../utils/Comments";
 import "../styles/Home.css";
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
 
+
 const Home = (props) => {
+
 	const [thread, setThread] = useState("");
 	const [threadList, setThreadList] = useState([]);
 	const [authenticated, setAuthenticated] = useState(false); // Add authenticated state
