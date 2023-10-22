@@ -4,7 +4,7 @@ import NavComponent from "./NavComponent";
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
 import "../styles/Replies.css";
 
-const Replies = () => {
+const Replies = (props) => {
 	const [replyList, setReplyList] = useState([]);
 	const [reply, setReply] = useState("");
 	const [title, setTitle] = useState("");
@@ -79,7 +79,7 @@ const Replies = () => {
 
 	return (
 		<>
-			<NavComponent />
+			<NavComponent setUserId={props.setUserId} userId={props.userId} />
 			<main className="replies">
 				{/* <h1 className="repliesTitle">{title}</h1> */}
 

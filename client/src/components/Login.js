@@ -8,7 +8,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import "../styles/Login.css";
 import NavComponent from "./NavComponent";
 
-const Login = () => {
+const Login = (props) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
@@ -47,7 +47,7 @@ const Login = () => {
 
 	return (
 		<>
-			<NavComponent />
+			<NavComponent setUserId={props.setUserId} userId={props.userId} />
 			<Card className="testLogin">
 				<Card.Body>
 					<Card.Title className="testTitle">Login</Card.Title>

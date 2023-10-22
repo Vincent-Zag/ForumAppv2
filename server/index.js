@@ -173,6 +173,7 @@ app.get("/api/user/:userId/profile", (req, res) => {
       email: req.session.user.email,
       username: req.session.user.username,
     });
+    console.log("res",res);
   } else {
     res.status(401).json({ error: "Unauthorized" });
   }
@@ -313,12 +314,7 @@ app.post("/api/create/reply", async (req, res) => {
 });
 
 
-
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
-});
-
-//User based Stats
+// User based Stats
 // FUTURE SPRINT
 // app.get("/api/user/:userId/replies", async (req, res) => {
 //   if (req.session.user) {
@@ -366,6 +362,11 @@ app.listen(PORT, () => {
 //     res.status(401).json({ error: "Unauthorized" });
 //   }  
 // });
+
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});
+
 
 
 
