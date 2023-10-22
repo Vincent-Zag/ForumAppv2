@@ -93,11 +93,15 @@ a {
 
 .testLogin {
 	width: 30rem;
-	margin: auto;
-	align-items: center;
+	justify-content: center;
 	padding: 2rem;
 	border-radius: 10px;
+	margin: auto;
 	margin-top: 200px;
+}
+
+.mb-3 {
+	width: 20rem;
 }
 
 .loginInput {
