@@ -79,7 +79,11 @@ const NavComponent = (props) => {
 						<Nav.Link href="#home" onClick={handleSubmit}>
 							Home
 						</Nav.Link>
-						<Nav.Link href="#profile" onClick={handleProfile}>
+						<Nav.Link
+							href="#profile"
+							onClick={handleProfile}
+							disabled={!authenticated}
+						>
 							Profile
 						</Nav.Link>
 					</Nav>

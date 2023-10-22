@@ -83,13 +83,21 @@ a {
 .thread__item {
 	padding: 10px;
 	width: 800px;
-	box-shadow: 0 0 1px 1px #0a4442;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
+	flex-direction: column;
 	margin-bottom: 10px;
 	margin-left: auto;
 	margin-right: auto;
+}
+.thread__item p {
+	margin-bottom: 0 !important;
+	font-size: 20px;
+}
+.thread {
+	height: 100px;
+	align-items: center;
 }
 .navbar {
 	width: 100%;
@@ -178,7 +186,7 @@ a {
 
 .create-thread-container {
 	width: 1320px;
-	margin-top: 100px;
+	margin-top: 160px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -191,8 +199,19 @@ a {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 100px;
 }
 
 .thread-title {
 	margin-bottom: 32px;
+}
+
+.form-control {
+	box-shadow: 0 0 1px 1px #ffffff;
+}
+
+.thread:hover {
+	border: 1px solid #fff; /* Add a white border */
+	border-radius: 10px;
+	cursor: pointer; /* Change the cursor to indicate interactivity */
 }

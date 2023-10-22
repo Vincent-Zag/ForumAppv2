@@ -4,7 +4,7 @@ import NavComponent from "./NavComponent";
 import Likes from "../utils/Likes";
 import Comments from "../utils/Comments";
 import "../styles/Home.css";
-import { Card, Form, Button, Row, Col } from "react-bootstrap";
+import { Card, Form, Button, Row, Col, Container } from "react-bootstrap";
 
 const Home = (props) => {
 	const [thread, setThread] = useState("");
@@ -118,24 +118,30 @@ const Home = (props) => {
 						Threads
 					</Card.Title>
 					{threadList.map((thread) => (
-						<div className="thread__item" key={thread._id}>
-							<p>{thread.title}</p>
-							<div className="react__container">
-								{thread.likes && (
-									<Likes
-										numberOfLikes={thread.likes.length}
-										threadId={thread._id}
-									/>
-								)}
-								{thread.replies && (
-									<Comments
-										numberOfComments={thread.replies.length}
-										threadId={thread._id}
-										title={thread.title}
-									/>
-								)}
-							</div>
-						</div>
+						<Container className="thread" key={thread._id}>
+							<Row className="thread-info">
+								<Col xs="auto" className="thread-icon">
+									{thread.likes && (
+										<Likes
+											numberOfLikes={thread.likes.length}
+											threadId={thread._id}
+										/>
+									)}
+								</Col>
+								<Col xs="auto" className="thread-icon">
+									{thread.replies && (
+										<Comments
+											numberOfComments={
+												thread.replies.length
+											}
+											threadId={thread._id}
+											title={thread.title}
+										/>
+									)}
+								</Col>
+								<Col>{thread.title}</Col>
+							</Row>
+						</Container>
 					))}
 				</Card.Body>
 			</Card>

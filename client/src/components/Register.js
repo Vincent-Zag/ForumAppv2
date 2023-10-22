@@ -47,7 +47,7 @@ const Register = (props) => {
 	};
 	return (
 		<>
-			<NavComponent setUserId = {props.setUserId} userId = {props.userId}/>
+			<NavComponent setUserId={props.setUserId} userId={props.userId} />
 			<Card className="test">
 				<Card.Body>
 					<Card.Title className="testTitle">Register</Card.Title>
@@ -125,7 +125,8 @@ const Register = (props) => {
 								Create Account
 							</Button>
 							<p>
-								Have an account? <Link to="/">Sign in</Link>
+								Have an account?{" "}
+								<Link to="/login">Sign in</Link>
 							</p>
 						</div>
 					</Form>

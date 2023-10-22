@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import NavComponent from "./NavComponent";
-import { Card, Form, Button, Row, Col } from "react-bootstrap";
+import { Card, Form, Button, Row, Col, Container } from "react-bootstrap";
 import "../styles/Replies.css";
 
 const Replies = (props) => {
@@ -89,14 +89,21 @@ const Replies = (props) => {
 						.slice()
 						.reverse()
 						.map((reply) => (
-							<div className="thread__item">
-								<p>{reply.text}</p>
-								<div className="react__container">
-									<p style={{ opacity: "1" }}>
-										by {reply.name}
-									</p>
-								</div>
-							</div>
+							<Container className="thread__item">
+								<Row className="react__container">
+									<Col
+										className="thread-username"
+										style={{ opacity: "1" }}
+									>
+										{reply.name}
+									</Col>
+								</Row>
+								<Row>
+									<Col className="thread-reply-text">
+										{reply.text}
+									</Col>
+								</Row>
+							</Container>
 						))}
 
 					<Form className="reply-form" onSubmit={handleSubmitReply}>
