@@ -1,3 +1,5 @@
 .navbar-custom {
 	height: 60px !important;
+	position: fixed !important;
+	top: 0;
 }

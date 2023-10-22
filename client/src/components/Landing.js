@@ -13,7 +13,7 @@ function Landing(props) {
 
 	return (
 		<>
-			<NavComponent setUserId = {props.setUserId} userId = {props.userId}/>
+			<NavComponent setUserId={props.setUserId} userId={props.userId} />
 			<Container>
 				<Row className="top-row">
 					<Col className="call-to-action">
@@ -21,8 +21,7 @@ function Landing(props) {
 							<h2>Innovate. Inspire. Share.</h2>
 							<p>
 								I am a pretentious block of text that will
-								explain why this app is iportant to your life
-								and will change it for the better.
+								explain why this app is cool and exciting.
 							</p>
 							<Link to="/dashboard">
 								<Button>Browse</Button>
@@ -46,10 +45,9 @@ function Landing(props) {
 								style={{ width: "200px", height: "200px" }}
 							/>
 							<Card.Body>
-								<Card.Title>Browse By Topic</Card.Title>
+								<Card.Title>Browse Topics</Card.Title>
 								<Card.Text>
-									Browse content based on categories for
-									discussion.
+									Browse variety of content for discussion.
 								</Card.Text>
 							</Card.Body>
 						</Card>

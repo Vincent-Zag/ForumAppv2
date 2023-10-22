@@ -1,103 +1,10 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Space Grotesk", sans-serif;
-}
-body {
-	background-image: url("../assets/background.jpg");
-	background-size: cover; 
-	background-position: center center;
-	background-attachment: fixed; 
-}
-
-input {
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    margin-bottom: 25px;
-    font-size: 17px;
-    color: #156b68;
-    align-items: center;
-    background-color: #e7e7e7;
-}
-
-a {
-    text-decoration: none;
-    color: #415088;
-    font-weight: 600;
-}
-
-.login p {
-    margin-bottom: 20px;
-}
-
-.loginTitle {
-    margin-bottom: 10px;
-    color: #1c5a62;
-}
-
-.loginForm{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.loginBtn {
-    display: block;
-    width: 250px;
-    padding: 15px;
-    margin-left: 32%;
-    margin-top: 2%;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    border-radius: 3px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fffbf5;
-    background-color: #61dafb;
-    margin-bottom: 15px;
-    transition: .5s ease all;
-    box-shadow: 0 9px #03b1e2;
-}
-
-.loginBtn:active {
-    box-shadow: 0 5px #61dafb;
-    transform: translateY(4px);
-}
-
-.log-row {
-    margin-top: 20px;
-}
-
-.logCard {
-    width: 500px;
-    background-color: #1e2833;
-    height: 580px;
-    border-radius: 40px;
-    padding: 40px;
-    margin: 50px;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    box-shadow: 20px 5px 2px #024a5e;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-} */
-
 .testLogin {
 	width: 30rem;
 	justify-content: center;
 	padding: 2rem;
 	border-radius: 10px;
 	margin: auto;
-	margin-top: 200px;
+	margin-top: 260px;
 }
 
 .mb-3 {
