@@ -18,13 +18,13 @@ const App = () => {
 					<Route
 						path="/"
 						element={
-							<Login setUserId={setUserId} userId={userId} />
+							<Landing setUserId={setUserId} userId={userId} />
 						}
 					/>
 					<Route
-						path="/landing"
+						path="/login"
 						element={
-							<Landing setUserId={setUserId} userId={userId} />
+							<Login setUserId={setUserId} userId={userId} />
 						}
 					/>
 					<Route
